@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DoanhThuTheoNam" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dcede38b-b997-48a3-9579-568aa12183da">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="NGUOILAP" class="java.lang.String"/>
+	<parameter name="NGAYLAP" class="java.util.Date"/>
+	<parameter name="BDDT" class="java.lang.Integer"/>
+	<parameter name="KTDT" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT YEAR(NGAYLAP) AS NAM, SUM(THANHTIEN) AS DOANHTHU
+FROM HOADON
+WHERE YEAR(NGAYLAP) BETWEEN $P{BDDT} AND $P{KTDT}
+GROUP BY YEAR(NGAYLAP)
+ORDER BY YEAR(NGAYLAP) DESC]]>
+	</queryString>
+	<field name="NAM" class="java.lang.Integer"/>
+	<field name="DOANHTHU" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="163" y="16" width="226" height="33" uuid="46211bf3-4573-4fae-92b8-44895f863e43"/>
+				<textElement>
+					<font fontName="Times New Roman" size="24"/>
+				</textElement>
+				<text><![CDATA[Doanh thu theo năm]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="90" splitType="Stretch">
+			<textField>
+				<reportElement x="163" y="0" width="100" height="20" uuid="9b1cbdef-00cf-4f3b-ae7c-482daa905180"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NGUOILAP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="63" y="0" width="100" height="20" uuid="fa4955a7-1ec1-417d-b8f4-13b6f171728d"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Người lập: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="20" width="100" height="20" uuid="cbdfaf41-8124-4c6b-a279-929bd2b7f1b8"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Ngày lập:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="163" y="20" width="100" height="20" uuid="4dff9eec-a6fd-454f-a93f-32c584bc07f9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NGAYLAP}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="185" y="51" width="164" height="25" uuid="8b8c9087-f746-49a4-9e09-f0c2903c9c43"/>
+				<textElement>
+					<font fontName="Times New Roman" size="16"/>
+				</textElement>
+				<text><![CDATA[Thông tin doanh thu]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="163" y="0" width="100" height="20" uuid="7663601b-b2d0-4c58-94b1-555967e31807"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="263" y="0" width="100" height="20" uuid="849318ad-f89a-4597-a96d-19f06770bd49"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="185" y="0" width="43" height="20" uuid="644023c6-8d26-42e0-bb72-d922688edd96"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Năm]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="0" width="69" height="20" uuid="22d6a8be-66bb-46e6-8a74-de6271937697"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Doanh Thu]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="163" y="0" width="100" height="20" uuid="7a6a214b-8883-4b97-9efa-ed1db1e2d25f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="263" y="0" width="100" height="20" uuid="60d7fe6e-53d1-4b90-8f1a-4165f642dbe8"/>
+			</rectangle>
+			<textField>
+				<reportElement x="185" y="0" width="43" height="20" uuid="446a5af1-221f-43c2-bd0b-8fbedba7947a"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NAM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="0" width="86" height="20" uuid="5eb08157-83b6-4c63-8cbe-98304d3b94a8"/>
+				<textFieldExpression><![CDATA[$F{DOANHTHU}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="166" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="129" y="66" width="200" height="100" uuid="840496b5-1b4c-40c0-92d4-87e24dd18b5b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{NAM}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{NAM}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{DOANHTHU}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="329" y="146" width="100" height="20" uuid="9297c50c-1e57-4ebe-bdb5-6fbeb5915223"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Đơn vị tính: VNĐ]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
